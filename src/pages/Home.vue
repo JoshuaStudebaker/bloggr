@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <h1>Welcome</h1>
     <blogs-component v-for="iBlog in blogs" :key="iBlog.id" :blogProp="iBlog" />
   </div>
 </template>
@@ -25,3 +24,5 @@ export default {
   },
 };
 </script>
+<style scope>
+</style>

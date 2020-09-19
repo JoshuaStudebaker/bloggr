@@ -79,7 +79,7 @@ export default new Vuex.Store({
       commit("setActiveBlog", activeBlog);
     },
 
-    async deleteUserBlog({ commit }, id) {
+    async deleteUserBlog({ commit, dispatch }, id) {
       try {
         console.log("delete store", id);
         await api.delete("blogs/" + id);
@@ -87,6 +87,7 @@ export default new Vuex.Store({
       } catch (error) {
         console.error("Failed to delete user blog");
       }
+      dispatch("getUserBlogs");
     },
   },
 });

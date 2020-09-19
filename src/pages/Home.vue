@@ -1,6 +1,8 @@
 <template>
   <main class="home container-fluid flex-grow-1">
-    <blogs-component v-for="iBlog in blogs" :key="iBlog.id" :blogProp="iBlog" />
+    <div class="row">
+      <blogs-component v-for="iBlog in blogs" :key="iBlog.id" :blogProp="iBlog" />
+    </div>
   </main>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
-  <header class="row">
-    <nav class="navbar navbar-expand-lg nav-style">
+  <header class="container-fluid">
+    <nav class="navbar navbar-expand-lg nav-style row">
       <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
         <div>
           <h3>Bloggr</h3>

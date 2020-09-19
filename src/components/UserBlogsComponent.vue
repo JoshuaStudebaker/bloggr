@@ -32,7 +32,7 @@ export default {
       console.log("editPost");
     },
     deletePost(id) {
-      console.log("deletePost", id);
+      this.$store.dispatch("deleteUserBlog", id);
     },
   },
 };

@@ -32,6 +32,10 @@ export default new Vuex.Store({
     setUserBlogs(state, userBlogs) {
       state.userBlogs = userBlogs;
     },
+
+    deleteUserBlog(state, id) {
+      state.blogs = state.blogs.filter((b) => b.id != id);
+    },
   },
   actions: {
     async getProfile({ commit }) {
@@ -74,10 +78,15 @@ export default new Vuex.Store({
       let activeBlog = res.data;
       commit("setActiveBlog", activeBlog);
     },
-    async getActiveUserBlog({ commit }, blogId) {
-      let res = await api.get("blogs/" + blogId);
-      let activeBlog = res.data;
-      commit("setActiveUserBlog", activeBlog);
+
+    async deleteUserBlog({ commit }, id) {
+      try {
+        console.log("delete store", id);
+        await api.delete("blogs/" + id);
+        commit("deleteUserBlog", id);
+      } catch (error) {
+        console.error("Failed to delete user blog");
+      }
     },
   },
 });

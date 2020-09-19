@@ -9,7 +9,7 @@
 <script>
 import blogsComponent from "../components/BlogsComponent";
 export default {
-  name: "home",
+  name: "Home",
   components: {
     blogsComponent,
   },

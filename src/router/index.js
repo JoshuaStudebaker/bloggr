@@ -8,6 +8,8 @@ import Home from "../pages/Home.vue";
 import Profile from "../pages/Profile.vue";
 // @ts-ignore
 import BlogWindow from "../pages/BlogWindow.vue";
+// @ts-ignore
+// import UserBlogWindow from "../pages/UserBlogWindow.vue";
 
 Vue.use(VueRouter);
 
@@ -29,6 +31,13 @@ const routes = [
     name: "blog-window",
     component: BlogWindow,
   },
+
+  // {
+  //   path: "profile/:userBlogId",
+  //   name: "user-blog-window",
+  //   component: UserBlogWindow,
+  //   beforeEnter: authGuard,
+  // },
 ];
 
 const router = new VueRouter({

@@ -1,7 +1,7 @@
 <template>
   <div class="blog-window">
     <h3>{{activeBlog.title}}</h3>
-    <h5>{{activeBlog.creator.name}}</h5>
+    <h5>{{activeBlog.creatorEmail}}</h5>
     <p>{{activeBlog.body}}</p>
   </div>
 </template>

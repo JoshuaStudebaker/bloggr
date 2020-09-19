@@ -1,15 +1,21 @@
 <template>
   <div class="user-blogs-component col-4">
-    <!-- TODO add user verify probably -->
-    <router-link :to="{name:'blog-window', params: {blogId: userBlogProp.id}}">
-      <div class="card card-style" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title">{{userBlogProp.title}}</h5>
-          <h6 class="card-subtitle text-muted">{{userBlogProp.creator.name}}</h6>
-          <p class="card-text">{{userBlogProp.body}}</p>
-        </div>
+    <div class="card card-style" style="width: 18rem;">
+      <div class="card-header justify-content-around">
+        <button type="button" class="btn btn-warning" @click="editPost">Edit</button>
+        <button type="button" class="btn btn-danger" @click="deletePost(userBlogProp.id)">Delete</button>
       </div>
-    </router-link>
+      <div class="card-body">
+        <h5 class="card-title">{{userBlogProp.title}}</h5>
+        <h6 class="card-subtitle text-muted">{{userBlogProp.creator.name}}</h6>
+        <p class="card-text">{{userBlogProp.body}}</p>
+      </div>
+      <div class="card-footer">
+        <router-link :to="{name:'blog-window', params: {blogId: userBlogProp.id}}">
+          <button class="btn btn-secondary">Click for Blog View</button>
+        </router-link>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -21,7 +27,14 @@ export default {
     return {};
   },
   computed: {},
-  methods: {},
+  methods: {
+    editPost() {
+      console.log("editPost");
+    },
+    deletePost(id) {
+      console.log("deletePost", id);
+    },
+  },
 };
 </script>
 

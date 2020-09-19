@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="container-fluid d-flex flex-column">
     <navbar />
     <router-view />
   </div>
@@ -23,8 +23,8 @@ export default {
   },
 };
 </script>
-<style lang="scss">
-@import "./assets/_variables.scss";
-@import "bootstrap";
-@import "./assets/_overrides.scss";
+<style scoped>
+#app {
+  min-height: 100vh;
+}
 </style>

@@ -3,7 +3,9 @@
     <nav class="navbar navbar-expand-lg nav-style row">
       <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
         <div>
-          <h3>Bloggr</h3>
+          <h3>
+            <i class="fab fa-blogger"></i> Bloggr
+          </h3>
         </div>
       </router-link>
       <button

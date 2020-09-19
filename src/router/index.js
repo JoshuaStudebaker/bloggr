@@ -1,10 +1,13 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import { authGuard } from "@bcwdev/auth0-vue";
+
 // @ts-ignore
 import Home from "../pages/Home.vue";
 // @ts-ignore
 import Profile from "../pages/Profile.vue";
-import { authGuard } from "@bcwdev/auth0-vue";
+// @ts-ignore
+import BlogWindow from "../pages/BlogWindow.vue";
 
 Vue.use(VueRouter);
 
@@ -19,6 +22,12 @@ const routes = [
     name: "Profile",
     component: Profile,
     beforeEnter: authGuard,
+  },
+
+  {
+    path: "/blogs/:blogId",
+    name: "blog-window",
+    component: BlogWindow,
   },
 ];
 

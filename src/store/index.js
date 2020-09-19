@@ -55,6 +55,12 @@ export default new Vuex.Store({
         console.error("Unable to get user blogs");
       }
     },
+
+    async createBlog({ commit, state }, newBlog) {
+      let res = await api.post("blogs", newBlog);
+      commit("setAllBlogs", [...state.blogs, res.data]);
+    },
+
     async getActiveBlog({ commit }, blogId) {
       let res = await api.get("blogs/" + blogId);
       let activeBlog = res.data;

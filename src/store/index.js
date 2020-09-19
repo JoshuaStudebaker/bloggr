@@ -50,6 +50,7 @@ export default new Vuex.Store({
     async getUserBlogs({ commit }) {
       try {
         let res = await api.get("profile/blogs");
+        console.log("user-blogs", res);
         commit("setUserBlogs", res.data);
       } catch (error) {
         console.error("Unable to get user blogs");
@@ -57,7 +58,9 @@ export default new Vuex.Store({
     },
 
     async createBlog({ commit, state }, newBlog) {
+      console.log("new-blog", newBlog);
       let res = await api.post("blogs", newBlog);
+      console.log("new-blog-res", res);
       commit("setAllBlogs", [...state.blogs, res.data]);
     },
 

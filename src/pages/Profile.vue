@@ -4,22 +4,38 @@
       <h1>Welcome {{ profile.name }}</h1>
       <img class="rounded" :src="profile.picture" alt />
       <p>{{ profile.email }}</p>
+      <form class="form-inline" @submit.prevent="createBlog">
+        <div class="form-group">
+          <input
+            type="text"
+            v-model="newBlog.title"
+            class="form-control"
+            placeholder="Blog Title"
+            aria-describedby="helpId"
+          />
+          <textarea class="form-control" v-model="newBlog.body" rows="10" placeholder="Content..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-success">Create Blog</button>
+      </form>
     </div>
     <div class="row">
-      <form-component />
+      <user-blogs-component v-for="iBlog in userBlogs" :key="iBlog.id" :userBlogProp="iBlog" />
     </div>
-    <div class="row"></div>
   </main>
 </template>
 
 <script>
-import userBlogComponent from "../components/UserBlogsComponent";
-import formComponent from "../components/FormComponent";
+import userBlogsComponent from "../components/UserBlogsComponent";
+
 export default {
   name: "Profile",
   components: {
-    userBlogComponent,
-    formComponent,
+    userBlogsComponent,
+  },
+  data() {
+    return {
+      newBlog: {},
+    };
   },
   mounted() {
     this.$store.dispatch("getUserBlogs");
@@ -30,6 +46,11 @@ export default {
     },
     userBlogs() {
       return this.$store.state.userBlogs;
+    },
+  },
+  methods: {
+    createBlog() {
+      this.$store.dispatch("createBlog", this.newBlog);
     },
   },
 };

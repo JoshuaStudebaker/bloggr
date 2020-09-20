@@ -79,11 +79,9 @@ export default new Vuex.Store({
     },
 
     async createComment({ commit, state }, newComment) {
-      console.log("new-blog", newComment);
-      let res = await api.post(
-        "blogs/" + state.activeBlog.id + "/comments",
-        newComment
-      );
+      console.log("new-comment", newComment);
+      newComment.blog = state.activeBlog.id;
+      let res = await api.post("/comments", newComment);
       console.log("new-blog-res", res);
       commit("setComments", [...state.activeComments, res.data]);
     },

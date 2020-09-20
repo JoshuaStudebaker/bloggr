@@ -101,6 +101,14 @@ export default new Vuex.Store({
       dispatch("getUserBlogs");
     },
 
+    async nullifyLiveComment({ state, commit }) {
+      try {
+        commit("setLiveComment", {});
+      } catch (error) {
+        console.error("couldn't delete edit form");
+      }
+    },
+
     async getActiveBlog({ commit }, blogId) {
       let res = await api.get("blogs/" + blogId);
       let activeBlog = res.data;
@@ -143,8 +151,9 @@ export default new Vuex.Store({
 
     async loadComment({ commit, state }, id) {
       try {
-        let liveComment = state.activeComments.filter((c) => c.id == id);
-        console.log("comment-load", liveComment);
+        let liveCommentArray = state.activeComments.filter((c) => c.id == id);
+        console.log("comment-load", liveCommentArray);
+        let liveComment = liveCommentArray[0];
         commit("setLiveComment", liveComment);
       } catch (error) {
         console.error("couldn't pull up commit form");

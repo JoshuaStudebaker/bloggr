@@ -1,8 +1,9 @@
 <template>
   <div class="blog-window">
-    <h3>{{activeBlog.title}}</h3>
-    <h5>{{activeBlog.creatorEmail}}</h5>
-    <p>{{activeBlog.body}}</p>
+    <h3>{{ activeBlog.title }}</h3>
+    <h5>{{ activeBlog.creatorEmail }}</h5>
+    <p>{{ activeBlog.body }}</p>
+    <p>Live Comment: {{ liveComment.body }}</p>
     <comments-component
       v-for="iComment in activeComments"
       :key="iComment.id"
@@ -21,7 +22,7 @@
     </form>
   </div>
 </template>
-// 
+//
 <script>
 import commentsComponent from "../components/CommentsComponent";
 export default {
@@ -37,6 +38,7 @@ export default {
   mounted() {
     this.$store.dispatch("getActiveBlog", this.$route.params.blogId);
     this.$store.dispatch("getCommentsByBlog", this.$route.params.blogId);
+    this.$store.dispatch("nullifyLiveComment");
   },
   computed: {
     activeBlog() {
@@ -44,6 +46,10 @@ export default {
     },
     activeComments() {
       return this.$store.state.activeComments;
+    },
+    liveComment() {
+      console.log("liveComment", this.$store.state.liveComment);
+      return this.$store.state.liveComment;
     },
   },
   methods: {
@@ -54,5 +60,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

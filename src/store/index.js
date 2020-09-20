@@ -149,12 +149,13 @@ export default new Vuex.Store({
       }
     },
 
-    async loadComment({ commit, state }, id) {
+    async loadComment({ commit, state, dispatch }, id) {
       try {
         let liveCommentArray = state.activeComments.filter((c) => c.id == id);
         console.log("comment-load", liveCommentArray);
         let liveComment = liveCommentArray[0];
         commit("setLiveComment", liveComment);
+        dispatch("getProfile");
       } catch (error) {
         console.error("couldn't pull up commit form");
       }

@@ -3,7 +3,15 @@
     <h3>{{ activeBlog.title }}</h3>
     <h5>{{ activeBlog.creatorEmail }}</h5>
     <p>{{ activeBlog.body }}</p>
-    <p>Live Comment: {{ liveComment.body }}</p>
+    <div>
+      <p>Live Comment: {{ liveComment.body }}</p>
+      <p>{{ profile.email }}</p>
+      <button
+        v-if="profile.email == liveComment.creatorEmail && liveComment.body"
+      >
+        Delete
+      </button>
+    </div>
     <comments-component
       v-for="iComment in activeComments"
       :key="iComment.id"
@@ -39,8 +47,12 @@ export default {
     this.$store.dispatch("getActiveBlog", this.$route.params.blogId);
     this.$store.dispatch("getCommentsByBlog", this.$route.params.blogId);
     this.$store.dispatch("nullifyLiveComment");
+    // this.$store.dispatch("getProfile");
   },
   computed: {
+    profile() {
+      return this.$store.state.profile;
+    },
     activeBlog() {
       return this.$store.state.activeBlog;
     },

@@ -14,6 +14,7 @@ export default new Vuex.Store({
     activeUserBlog: {},
     activeComments: [],
     liveComment: {},
+    allComments: [],
   },
   mutations: {
     setProfile(state, profile) {
@@ -37,6 +38,10 @@ export default new Vuex.Store({
 
     deleteUserBlog(state, id) {
       state.blogs = state.blogs.filter((b) => b.id != id);
+    },
+
+    deleteComment(state, id) {
+      state.activeComments = state.activeComments.filter((c) => c.id != id);
     },
 
     setLiveComment(state, comment) {
@@ -101,7 +106,7 @@ export default new Vuex.Store({
       dispatch("getUserBlogs");
     },
 
-    async nullifyLiveComment({ state, commit }) {
+    async nullifyLiveComment({ commit }) {
       try {
         commit("setLiveComment", {});
       } catch (error) {
@@ -134,6 +139,19 @@ export default new Vuex.Store({
         commit("deleteUserBlog", id);
       } catch (error) {
         console.error("Failed to delete user blog");
+      }
+      dispatch("getUserBlogs");
+    },
+
+    async deleteComment({ commit, state, dispatch }, id) {
+      try {
+        console.log("delete comment", id);
+        await api.get("blogs/" + state.activeBlog.id + "/comments", id);
+        await api.delete("comments/" + id);
+        commit("deleteComment", id);
+        dispatch("nullifyLiveComment");
+      } catch (error) {
+        console.error("Failed to delete comment");
       }
       dispatch("getUserBlogs");
     },

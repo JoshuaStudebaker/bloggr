@@ -5,12 +5,22 @@
     <p>{{ activeBlog.body }}</p>
     <div>
       <p>Live Comment: {{ liveComment.body }}</p>
-      <p>{{ profile.email }}</p>
-      <button
-        v-if="profile.email == liveComment.creatorEmail && liveComment.body"
-      >
-        Delete
-      </button>
+      <div v-if="profile.email == liveComment.creatorEmail && liveComment.body">
+        <button
+          type="button"
+          class="btn btn-danger"
+          @click="deleteComment(liveComment.id)"
+        >
+          Delete
+        </button>
+        <button
+          type="button"
+          class="btn btn-success"
+          @click="editComment(liveComment.id)"
+        >
+          Edit
+        </button>
+      </div>
     </div>
     <comments-component
       v-for="iComment in activeComments"
@@ -47,7 +57,6 @@ export default {
     this.$store.dispatch("getActiveBlog", this.$route.params.blogId);
     this.$store.dispatch("getCommentsByBlog", this.$route.params.blogId);
     this.$store.dispatch("nullifyLiveComment");
-    // this.$store.dispatch("getProfile");
   },
   computed: {
     profile() {
@@ -67,6 +76,12 @@ export default {
   methods: {
     addComment() {
       this.$store.dispatch("createComment", this.newComment);
+    },
+    editComment(id) {
+      console.log("edit comment", id);
+    },
+    deleteComment(id) {
+      this.$store.dispatch("deleteComment", id);
     },
   },
 };

@@ -46,6 +46,7 @@ export default new Vuex.Store({
     async getProfile({ commit }) {
       try {
         let res = await api.get("profile");
+        console.log("profile-store", res);
         commit("setProfile", res.data);
       } catch (error) {
         console.error(error);

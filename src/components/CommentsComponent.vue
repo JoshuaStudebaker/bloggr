@@ -1,7 +1,7 @@
 <template>
   <div class="comments-component">
-    <h6>{{commentsProp.creatorEmail}}</h6>
-    <p>{{commentsProp.body}}</p>
+    <h6>{{ commentsProp.creatorEmail }}</h6>
+    <p>{{ commentsProp.body }}</p>
   </div>
 </template>
 
@@ -9,6 +9,7 @@
 export default {
   name: "comments-component",
   props: ["commentsProp"],
+  mounted() {},
   data() {
     return {};
   },
@@ -18,5 +19,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

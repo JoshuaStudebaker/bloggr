@@ -15,7 +15,12 @@
             placeholder="Blog Title"
             aria-describedby="helpId"
           />
-          <textarea class="form-control" v-model="newBlog.body" rows="10" placeholder="Content..."></textarea>
+          <textarea
+            class="form-control"
+            v-model="newBlog.body"
+            rows="10"
+            placeholder="Content..."
+          ></textarea>
         </div>
         <button type="submit" class="btn btn-success">Create Blog</button>
       </form>
@@ -40,21 +45,27 @@
           </div>
           <button type="submit" class="btn btn-success">Edit Blog</button>
         </form>
-        <button type="button" class="btn btn-warning" @click="unloadEditForm">Cancel</button>
+        <button type="button" class="btn btn-warning" @click="unloadEditForm">
+          Cancel
+        </button>
       </div>
       <div class="col-4">
         <div class="card card-style" style="width: 18rem;">
           <div class="card-header justify-content-around">Original</div>
           <div class="card-body">
-            <h5 class="card-title">{{activeUserBlog.title}}</h5>
-            <p class="card-text">{{activeUserBlog.body}}</p>
+            <h5 class="card-title">{{ activeUserBlog.title }}</h5>
+            <p class="card-text">{{ activeUserBlog.body }}</p>
           </div>
         </div>
       </div>
     </div>
 
     <div class="row">
-      <user-blogs-component v-for="iBlog in userBlogs" :key="iBlog.id" :userBlogProp="iBlog" />
+      <user-blogs-component
+        v-for="iBlog in userBlogs"
+        :key="iBlog.id"
+        :userBlogProp="iBlog"
+      />
     </div>
   </main>
 </template>
@@ -75,6 +86,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch("getUserBlogs");
+    this.$store.dispatch("getProfile");
   },
   computed: {
     profile() {

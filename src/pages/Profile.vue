@@ -21,26 +21,38 @@
       </form>
     </div>
     <div class="row" v-if="activeUserBlog.id">
-      <form class="form-inline" @submit.prevent="editUserBlog">
-        <div class="form-group">
-          <input
-            type="text"
-            v-model="editBlog.title"
-            class="form-control"
-            aria-describedby="helpId"
-            :placeholder="activeUserBlog.title"
-          />
-          <textarea
-            class="form-control"
-            v-model="editBlog.body"
-            rows="10"
-            :placeholder="activeUserBlog.body"
-          ></textarea>
+      <div class="col-8">
+        <form class="form-inline" @submit.prevent="editUserBlog">
+          <div class="form-group">
+            <input
+              type="text"
+              v-model="editBlog.title"
+              class="form-control"
+              aria-describedby="helpId"
+              :placeholder="activeUserBlog.title"
+            />
+            <textarea
+              class="form-control"
+              v-model="editBlog.body"
+              rows="10"
+              :placeholder="activeUserBlog.body"
+            ></textarea>
+          </div>
+          <button type="submit" class="btn btn-success">Edit Blog</button>
+        </form>
+        <button type="button" class="btn btn-warning" @click="unloadEditForm">Cancel</button>
+      </div>
+      <div class="col-4">
+        <div class="card card-style" style="width: 18rem;">
+          <div class="card-header justify-content-around">Original</div>
+          <div class="card-body">
+            <h5 class="card-title">{{activeUserBlog.title}}</h5>
+            <p class="card-text">{{activeUserBlog.body}}</p>
+          </div>
         </div>
-        <button type="submit" class="btn btn-success">Edit Blog</button>
-      </form>
-      <button type="button" class="btn btn-warning" @click="unloadEditForm">Cancel</button>
+      </div>
     </div>
+
     <div class="row">
       <user-blogs-component v-for="iBlog in userBlogs" :key="iBlog.id" :userBlogProp="iBlog" />
     </div>
@@ -94,5 +106,10 @@ export default {
 <style scoped>
 img {
   max-width: 100px;
+}
+.card-style {
+  background-color: azure;
+  border: 4px solid skyblue;
+  box-shadow: 0px 0px 3px 3px cadetblue;
 }
 </style>

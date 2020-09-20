@@ -21,7 +21,7 @@
       </form>
     </div>
     <div class="row" v-if="activeUserBlog.id">
-      <form class="form-inline" @submit.prevent="editUserBlog(activeUserBlog.id)">
+      <form class="form-inline" @submit.prevent="editUserBlog">
         <div class="form-group">
           <input
             type="text"
@@ -82,8 +82,6 @@ export default {
     },
     editUserBlog(id) {
       console.log("first", this.editBlog.title, this.editBlog.body);
-      this.editBlog.id = id;
-      console.log("second", this.editBlog);
       this.$store.dispatch("editBlog", this.editBlog);
     },
     unloadEditForm() {

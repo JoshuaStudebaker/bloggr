@@ -82,7 +82,7 @@ export default new Vuex.Store({
       }
     },
 
-    async getCommentsByBlog({ commit, dispatch }, blogId) {
+    async getCommentsByBlog({ commit }, blogId) {
       console.log("store-comments", blogId);
       let res = await api.get("blogs/" + blogId + "/comments");
       console.log("store-comments-activeComments", res.data);
@@ -153,7 +153,18 @@ export default new Vuex.Store({
       } catch (error) {
         console.error("Failed to delete comment");
       }
-      dispatch("getUserBlogs");
+    },
+
+    async editComment({ commit, state, dispatch }, editedData) {
+      try {
+        console.log("edit comment", editedData);
+        let res = await api.put("comments/" + state.liveComment.id);
+        console.log("edit-store-comment", res);
+        dispatch("nullifyLiveComment");
+      } catch (error) {
+        console.error("Failed to delete comment");
+      }
+      dispatch("getCommentsByBlog", state.activeBlog.id);
     },
 
     async loadEditForm({ commit }, blogId) {

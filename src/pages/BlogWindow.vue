@@ -13,13 +13,22 @@
         >
           Delete
         </button>
-        <button
-          type="button"
-          class="btn btn-success"
-          @click="editComment(liveComment.id)"
-        >
-          Edit
-        </button>
+
+        <div>
+          <form class="form-inline" @submit.prevent="editComment">
+            <div class="form-group">
+              <textarea
+                class="form-control"
+                v-model="editedComment.body"
+                rows="2"
+                placeholder="(Be nice!!!)"
+              ></textarea>
+            </div>
+            <button type="submit" class="btn btn-success">
+              Edit
+            </button>
+          </form>
+        </div>
       </div>
     </div>
     <comments-component
@@ -33,7 +42,7 @@
           class="form-control"
           v-model="newComment.body"
           rows="2"
-          placeholder="(Plase be nice!!!)"
+          placeholder="(Please be nice!!!)"
         ></textarea>
       </div>
       <button type="submit" class="btn btn-success">Add Comment</button>
@@ -51,6 +60,7 @@ export default {
   data() {
     return {
       newComment: {},
+      editedComment: {},
     };
   },
   mounted() {
@@ -77,8 +87,8 @@ export default {
     addComment() {
       this.$store.dispatch("createComment", this.newComment);
     },
-    editComment(id) {
-      console.log("edit comment", id);
+    editComment() {
+      this.$store.dispatch("editComment", this.editedComment);
     },
     deleteComment(id) {
       this.$store.dispatch("deleteComment", id);

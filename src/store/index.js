@@ -13,6 +13,7 @@ export default new Vuex.Store({
     userBlogs: [],
     activeUserBlog: {},
     activeComments: [],
+    liveComment: {},
   },
   mutations: {
     setProfile(state, profile) {
@@ -36,6 +37,10 @@ export default new Vuex.Store({
 
     deleteUserBlog(state, id) {
       state.blogs = state.blogs.filter((b) => b.id != id);
+    },
+
+    setLiveComment(state, comment) {
+      state.liveComment = comment;
     },
 
     setComments(state, comments) {
@@ -133,6 +138,16 @@ export default new Vuex.Store({
         commit("setActiveUserBlog", activeUserBlog);
       } catch (error) {
         console.error("couldn't pull up edit form");
+      }
+    },
+
+    async loadComment({ commit, state }, id) {
+      try {
+        let liveComment = state.activeComments.filter((c) => c.id == id);
+        console.log("comment-load", liveComment);
+        commit("setLiveComment", liveComment);
+      } catch (error) {
+        console.error("couldn't pull up commit form");
       }
     },
     async unloadEditForm({ commit }) {

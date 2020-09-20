@@ -12,6 +12,7 @@ export default new Vuex.Store({
     activeBlog: {},
     userBlogs: [],
     activeUserBlog: {},
+    activeComments: [],
   },
   mutations: {
     setProfile(state, profile) {
@@ -35,6 +36,10 @@ export default new Vuex.Store({
 
     deleteUserBlog(state, id) {
       state.blogs = state.blogs.filter((b) => b.id != id);
+    },
+
+    setComments(state, comments) {
+      state.activeComments = comments;
     },
   },
   actions: {
@@ -64,6 +69,23 @@ export default new Vuex.Store({
       } catch (error) {
         console.error("Unable to get user blogs");
       }
+    },
+
+    async getCommentsByBlog({ commit, dispatch }, blogId) {
+      console.log("store-comments", blogId);
+      let res = await api.get("blogs/" + blogId + "/comments");
+      console.log("store-comments-activeComments", res.data);
+      commit("setComments", res.data);
+    },
+
+    async createComment({ commit, state }, newComment) {
+      console.log("new-blog", newComment);
+      let res = await api.post(
+        "blogs/" + state.activeBlog.id + "/comments",
+        newComment
+      );
+      console.log("new-blog-res", res);
+      commit("setComments", [...state.activeComments, res.data]);
     },
 
     async createBlog({ commit, state }, newBlog) {

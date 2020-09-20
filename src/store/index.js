@@ -86,11 +86,13 @@ export default new Vuex.Store({
       commit("setComments", [...state.activeComments, res.data]);
     },
 
-    async createBlog({ commit, state }, newBlog) {
+    async createBlog({ commit, dispatch, state }, newBlog) {
       console.log("new-blog", newBlog);
       let res = await api.post("blogs", newBlog);
       console.log("new-blog-res", res);
       commit("setAllBlogs", [...state.blogs, res.data]);
+      commit("setUserBlogs", [...state.userBlogs, res.data]);
+      dispatch("getUserBlogs");
     },
 
     async getActiveBlog({ commit }, blogId) {

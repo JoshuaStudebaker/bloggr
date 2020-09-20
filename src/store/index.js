@@ -108,6 +108,7 @@ export default new Vuex.Store({
         console.error(error);
       }
       dispatch("getUserBlogs");
+      dispatch("unloadEditForm");
     },
 
     async deleteUserBlog({ commit, dispatch }, id) {

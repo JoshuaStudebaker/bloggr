@@ -158,7 +158,7 @@ export default new Vuex.Store({
     async editComment({ commit, state, dispatch }, editedData) {
       try {
         console.log("edit comment", editedData);
-        let res = await api.put("comments/" + state.liveComment.id);
+        let res = await api.put("comments/" + state.liveComment.id, editedData);
         console.log("edit-store-comment", res);
         dispatch("nullifyLiveComment");
       } catch (error) {

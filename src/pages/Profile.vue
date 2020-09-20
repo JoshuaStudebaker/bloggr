@@ -4,6 +4,8 @@
       <h1>Welcome {{ profile.name }}</h1>
       <img class="rounded" :src="profile.picture" alt />
       <p>{{ profile.email }}</p>
+    </div>
+    <div class="row" v-if="!activeUserBlog.id">
       <form class="form-inline" @submit.prevent="createBlog">
         <div class="form-group">
           <input
@@ -17,6 +19,27 @@
         </div>
         <button type="submit" class="btn btn-success">Create Blog</button>
       </form>
+    </div>
+    <div class="row" v-if="activeUserBlog.id">
+      <form class="form-inline" @submit.prevent="editUserBlog(activeUserBlog.id)">
+        <div class="form-group">
+          <input
+            type="text"
+            v-model="editBlog.title"
+            class="form-control"
+            aria-describedby="helpId"
+            :placeholder="activeUserBlog.title"
+          />
+          <textarea
+            class="form-control"
+            v-model="editBlog.body"
+            rows="10"
+            :placeholder="activeUserBlog.body"
+          ></textarea>
+        </div>
+        <button type="submit" class="btn btn-success">Edit Blog</button>
+      </form>
+      <button type="button" class="btn btn-warning" @click="unloadEditForm">Cancel</button>
     </div>
     <div class="row">
       <user-blogs-component v-for="iBlog in userBlogs" :key="iBlog.id" :userBlogProp="iBlog" />
@@ -35,6 +58,7 @@ export default {
   data() {
     return {
       newBlog: {},
+      editBlog: {},
     };
   },
   mounted() {
@@ -47,10 +71,23 @@ export default {
     userBlogs() {
       return this.$store.state.userBlogs;
     },
+
+    activeUserBlog() {
+      return this.$store.state.activeUserBlog;
+    },
   },
   methods: {
     createBlog() {
       this.$store.dispatch("createBlog", this.newBlog);
+    },
+    editUserBlog(id) {
+      console.log("first", this.editBlog.title, this.editBlog.body);
+      this.editBlog.id = id;
+      console.log("second", this.editBlog);
+      this.$store.dispatch("editBlog", this.editBlog);
+    },
+    unloadEditForm() {
+      this.$store.dispatch("unloadEditForm");
     },
   },
 };

@@ -2,7 +2,7 @@
   <div class="user-blogs-component col-4">
     <div class="card card-style" style="width: 18rem;">
       <div class="card-header justify-content-around">
-        <button type="button" class="btn btn-warning" @click="editPost">Edit</button>
+        <button type="button" class="btn btn-warning" @click="editPost(userBlogProp.id)">Edit</button>
         <button type="button" class="btn btn-danger" @click="deletePost(userBlogProp.id)">Delete</button>
       </div>
       <div class="card-body">
@@ -28,8 +28,8 @@ export default {
   },
   computed: {},
   methods: {
-    editPost() {
-      console.log("editPost");
+    editPost(id) {
+      this.$store.dispatch("loadEditForm", id);
     },
     deletePost(id) {
       this.$store.dispatch("deleteUserBlog", id);

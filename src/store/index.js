@@ -11,7 +11,7 @@ export default new Vuex.Store({
     blogs: [],
     activeBlog: {},
     userBlogs: [],
-    activeUserBlog: [],
+    activeUserBlog: {},
   },
   mutations: {
     setProfile(state, profile) {
@@ -79,6 +79,9 @@ export default new Vuex.Store({
       commit("setActiveBlog", activeBlog);
     },
 
+    async editBlog({ commit }, newEdit) {
+      console.log(newEdit);
+    },
     async deleteUserBlog({ commit, dispatch }, id) {
       try {
         console.log("delete store", id);
@@ -88,6 +91,24 @@ export default new Vuex.Store({
         console.error("Failed to delete user blog");
       }
       dispatch("getUserBlogs");
+    },
+
+    async loadEditForm({ commit }, blogId) {
+      try {
+        let res = await api.get("blogs/" + blogId);
+        console.log("edit-form", res);
+        let activeUserBlog = res.data;
+        commit("setActiveUserBlog", activeUserBlog);
+      } catch (error) {
+        console.error("couldn't pull up edit form");
+      }
+    },
+    async unloadEditForm({ commit }) {
+      try {
+        commit("setActiveUserBlog", {});
+      } catch (error) {
+        console.error("couldn't delete edit form");
+      }
     },
   },
 });

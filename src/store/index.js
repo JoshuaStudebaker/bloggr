@@ -79,8 +79,14 @@ export default new Vuex.Store({
       commit("setActiveBlog", activeBlog);
     },
 
-    async editBlog({ commit }, newEdit) {
-      console.log(newEdit);
+    async editBlog({ commit, state }, blogEdit) {
+      try {
+        let id = state.activeUserBlog.id;
+        let res = await api.put("blogs/" + id, blogEdit);
+        commit("setActiveUserBlogs", res.data);
+      } catch (error) {
+        console.error(error);
+      }
     },
     async deleteUserBlog({ commit, dispatch }, id) {
       try {

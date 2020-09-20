@@ -80,8 +80,8 @@ export default {
     createBlog() {
       this.$store.dispatch("createBlog", this.newBlog);
     },
-    editUserBlog(id) {
-      console.log("first", this.editBlog.title, this.editBlog.body);
+    editUserBlog() {
+      console.log("edit-check", this.editBlog.title, this.editBlog.body);
       this.$store.dispatch("editBlog", this.editBlog);
     },
     unloadEditForm() {

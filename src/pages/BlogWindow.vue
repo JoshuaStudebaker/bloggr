@@ -1,15 +1,30 @@
 <template>
   <div class="blog-window">
-    <div class="card">
+    <div class="card col-12 my-3 shadow p-0">
       <div class="card-header">
         <h3>{{ activeBlog.title }}</h3>
-        <h5>{{ activeBlog.creatorEmail }}</h5>
       </div>
-      <p>{{ activeBlog.body }}</p>
+      <div class="card-body shadow">
+        <p class="card-text">{{ activeBlog.body }}</p>
+      </div>
+      <div class="card-footer">
+        <h5 class="text-muted">Author: {{ activeBlog.creatorEmail }}</h5>
+      </div>
     </div>
     <div>
-      <p>Live Comment: {{ liveComment.body }}</p>
+      <form v-if="!liveComment.body" @submit.prevent="addComment">
+        <div class="form-group">
+          <textarea
+            class="form-control"
+            v-model="newComment.body"
+            rows="2"
+            placeholder="(Please be nice!!!)"
+          ></textarea>
+        </div>
+        <button type="submit" class="btn btn-success">Add Comment</button>
+      </form>
       <div v-if="profile.email == liveComment.creatorEmail && liveComment.body">
+        <p>{{ liveComment.body }}</p>
         <button
           type="button"
           class="btn btn-danger"
@@ -19,7 +34,7 @@
         </button>
 
         <div>
-          <form class="form-inline" @submit.prevent="editComment">
+          <form @submit.prevent="editComment">
             <div class="form-group">
               <textarea
                 class="form-control"
@@ -40,17 +55,6 @@
       :key="iComment.id"
       :commentsProp="iComment"
     />
-    <form class="form-inline" @submit.prevent="addComment">
-      <div class="form-group">
-        <textarea
-          class="form-control"
-          v-model="newComment.body"
-          rows="2"
-          placeholder="(Please be nice!!!)"
-        ></textarea>
-      </div>
-      <button type="submit" class="btn btn-success">Add Comment</button>
-    </form>
   </div>
 </template>
 //
@@ -101,4 +105,13 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.card-header,
+.card-footer {
+  background-color: lightcyan;
+}
+
+.card-body {
+  background-color: ivory;
+}
+</style>

@@ -1,28 +1,35 @@
 <template>
   <div class="user-blogs-component col-md-4 my-3">
     <div class="card card-style" style="height: 24rem;">
-      <div class="card-header justify-content-around" style="height: 5rem">
+      <div
+        class="card-header d-flex justify-content-between"
+        style="height: 5rem"
+      >
         <button
           type="button"
-          class="btn btn-warning"
+          class="btn btn-warning btn-header"
           @click="editPost(userBlogProp.id)"
         >
           Edit
         </button>
         <button
           type="button"
-          class="btn btn-danger"
+          class="btn btn-danger btn-header"
           @click="deletePost(userBlogProp.id)"
         >
           Delete
         </button>
       </div>
-      <div class="card-body p-1" style="height: 15rem">
-        <h5 class="card-title">{{ userBlogProp.title }}</h5>
-        <h6 class="card-subtitle text-muted">
-          {{ userBlogProp.creator.name }}
-        </h6>
-        <p class="card-text">{{ userBlogProp.body }}</p>
+      <div class="card-body p-2" style="height: 21rem">
+        <div style="height: 4rem">
+          <h5 class="card-title">{{ userBlogProp.title }}</h5>
+          <h6 class="card-subtitle text-muted">
+            By: {{ userBlogProp.creator.name }}
+          </h6>
+        </div>
+        <p class="card-text" style="height: 15rem my-1">
+          {{ userBlogProp.body }}
+        </p>
       </div>
       <div class="card-footer" style="height: 4rem">
         <router-link
@@ -67,5 +74,11 @@ export default {
   overflow: hidden;
   max-height: 15rem;
   line-height: 1.5rem;
+}
+
+.btn-header {
+  min-width: 30%;
+  max-width: 38%;
+  height: 75%;
 }
 </style>

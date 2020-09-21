@@ -6,12 +6,12 @@
       <p>{{ profile.email }}</p>
     </div>
     <div class="row" v-if="!activeUserBlog.id">
-      <form class="form-inline" @submit.prevent="createBlog">
+      <form @submit.prevent="createBlog" class="rounded">
         <div class="form-group">
           <input
             type="text"
             v-model="newBlog.title"
-            class="form-control"
+            class="form-control my-1"
             placeholder="Blog Title"
             aria-describedby="helpId"
           />
@@ -25,9 +25,9 @@
         <button type="submit" class="btn btn-success">Create Blog</button>
       </form>
     </div>
-    <div class="row" v-if="activeUserBlog.id">
+    <div class="row p-3" v-if="activeUserBlog.id">
       <div class="col-8">
-        <form class="form-inline" @submit.prevent="editUserBlog">
+        <form @submit.prevent="editUserBlog" class="rounded">
           <div class="form-group">
             <input
               type="text"
@@ -43,15 +43,26 @@
               :placeholder="activeUserBlog.body"
             ></textarea>
           </div>
-          <button type="submit" class="btn btn-success">Edit Blog</button>
+          <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-success">Edit Blog</button>
+            <button
+              type="button"
+              class="btn btn-warning"
+              @click="unloadEditForm"
+            >
+              Cancel
+            </button>
+          </div>
         </form>
-        <button type="button" class="btn btn-warning" @click="unloadEditForm">
-          Cancel
-        </button>
       </div>
-      <div class="col-4">
-        <div class="card card-style" style="width: 18rem;">
-          <div class="card-header justify-content-around">Original</div>
+      <div class="col-4 p-2">
+        <div
+          class="card rounded card-style card-style2 pr-2"
+          style="width: 18rem;"
+        >
+          <div class="card-header justify-content-around">
+            <h5 class="m-auto"><i>Original</i></h5>
+          </div>
           <div class="card-body">
             <h5 class="card-title">{{ activeUserBlog.title }}</h5>
             <p class="card-text">{{ activeUserBlog.body }}</p>
@@ -123,5 +134,19 @@ img {
   background-color: azure;
   border: 4px solid skyblue;
   box-shadow: 0px 0px 3px 3px cadetblue;
+}
+
+form {
+  background-color: whitesmoke;
+  box-shadow: 0px 0px 0px 2px skyblue;
+  min-width: 45%;
+  padding: 15px;
+  margin: 15px;
+}
+
+.card-style2 {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  margin-right: 15px;
 }
 </style>

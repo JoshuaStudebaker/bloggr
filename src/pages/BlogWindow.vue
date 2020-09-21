@@ -1,27 +1,33 @@
 <template>
   <div class="blog-window">
     <div class="card col-12 my-3 shadow p-0">
-      <div class="card-header">
-        <h3>{{ activeBlog.title }}</h3>
-      </div>
       <div class="card-body shadow">
-        <p class="card-text">{{ activeBlog.body }}</p>
-      </div>
-      <div class="card-footer">
-        <h5 class="text-muted">Author: {{ activeBlog.creatorEmail }}</h5>
+        <div class="text-center">
+          <h3 class="text-dark">{{ activeBlog.title }}</h3>
+          <p class="text-muted my-1">By: {{ activeBlog.creatorEmail }}</p>
+
+          <hr />
+        </div>
+        <div class="shadow p-3">
+          <p class="card-text">{{ activeBlog.body }}</p>
+        </div>
       </div>
     </div>
     <div>
-      <form v-if="!liveComment.body" @submit.prevent="addComment">
+      <form
+        class="form-inline"
+        v-if="!liveComment.body"
+        @submit.prevent="addComment"
+      >
         <div class="form-group">
           <textarea
             class="form-control"
             v-model="newComment.body"
             rows="2"
-            placeholder="(Please be nice!!!)"
+            placeholder="Please be nice!!!"
           ></textarea>
         </div>
-        <button type="submit" class="btn btn-success">Add Comment</button>
+        <button type="submit" class="btn btn-success mx-3">Add Comment</button>
       </form>
       <div v-if="profile.email == liveComment.creatorEmail && liveComment.body">
         <p>{{ liveComment.body }}</p>
@@ -75,6 +81,7 @@ export default {
     this.$store.dispatch("getActiveBlog", this.$route.params.blogId);
     this.$store.dispatch("getCommentsByBlog", this.$route.params.blogId);
     this.$store.dispatch("nullifyLiveComment");
+    this.$store.dispatch("getProfile");
   },
   computed: {
     profile() {
@@ -112,6 +119,6 @@ export default {
 }
 
 .card-body {
-  background-color: ivory;
+  color: darkgray;
 }
 </style>

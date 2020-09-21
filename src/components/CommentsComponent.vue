@@ -1,14 +1,22 @@
 <template>
   <div class="comments-component">
-    <h6>{{ commentsProp.creatorEmail }}</h6>
-    <p>{{ commentsProp.body }}</p>
-    <button
-      type="button"
-      class="btn btn-primary"
-      @click="loadComment(commentsProp.id)"
-    >
-      View Comment
-    </button>
+    <div class="card my-2">
+      <div class="card-header p-1">
+        <p class="card-title text-muted my-auto">
+          By: {{ commentsProp.creatorEmail }}
+        </p>
+      </div>
+      <div class="card-body p-1">
+        <p class="card-text">{{ commentsProp.body }}</p>
+        <button
+          type="button"
+          class="btn btn-primary btn-sm"
+          @click="loadComment(commentsProp.id)"
+        >
+          View Comment
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 

@@ -1,8 +1,12 @@
 <template>
   <div class="blog-window">
-    <h3>{{ activeBlog.title }}</h3>
-    <h5>{{ activeBlog.creatorEmail }}</h5>
-    <p>{{ activeBlog.body }}</p>
+    <div class="card">
+      <div class="card-header">
+        <h3>{{ activeBlog.title }}</h3>
+        <h5>{{ activeBlog.creatorEmail }}</h5>
+      </div>
+      <p>{{ activeBlog.body }}</p>
+    </div>
     <div>
       <p>Live Comment: {{ liveComment.body }}</p>
       <div v-if="profile.email == liveComment.creatorEmail && liveComment.body">

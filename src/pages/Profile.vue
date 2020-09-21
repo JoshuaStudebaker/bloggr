@@ -1,7 +1,7 @@
 <template>
   <main class="container-fluid flex-grow-1 ">
     <div class="about text-center row my-3 shadow p-3 welcome">
-      <img class="rounded mr-3" :src="profile.picture" alt /><
+      <img class="rounded mr-3" :src="profile.picture" alt />
       <h1 class="my-auto">Welcome {{ profile.name }}</h1>
     </div>
     <div class="row" v-if="!activeUserBlog.id">

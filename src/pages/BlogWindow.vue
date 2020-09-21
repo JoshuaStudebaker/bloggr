@@ -29,18 +29,31 @@
         </div>
         <button type="submit" class="btn btn-success mx-3">Add Comment</button>
       </form>
-      <div v-if="profile.email == liveComment.creatorEmail && liveComment.body">
-        <p>{{ liveComment.body }}</p>
-        <button
-          type="button"
-          class="btn btn-danger"
-          @click="deleteComment(liveComment.id)"
-        >
-          Delete
-        </button>
+      <div class="d-flex justify-content-between" v-if="liveComment.body">
+        <div class="card col-6">
+          <div class="card-body">
+            <p class="card-text">
+              {{ liveComment.creatorEmail }} says: <br />
+              <span class="text-dark">{{ liveComment.body }}</span>
+            </p>
+            <button
+              v-if="
+                profile.email == liveComment.creatorEmail && liveComment.body
+              "
+              type="button"
+              class="btn btn-danger my-2"
+              @click="deleteComment(liveComment.id)"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
 
-        <div>
-          <form @submit.prevent="editComment">
+        <div
+          v-if="profile.email == liveComment.creatorEmail && liveComment.body"
+          class="col-6"
+        >
+          <form class="form-inline" @submit.prevent="editComment">
             <div class="form-group">
               <textarea
                 class="form-control"
@@ -49,8 +62,8 @@
                 placeholder="(Be nice!!!)"
               ></textarea>
             </div>
-            <button type="submit" class="btn btn-success">
-              Edit
+            <button type="submit" class="btn btn-success mx-3">
+              Edit Comment Text
             </button>
           </form>
         </div>
@@ -81,7 +94,6 @@ export default {
     this.$store.dispatch("getActiveBlog", this.$route.params.blogId);
     this.$store.dispatch("getCommentsByBlog", this.$route.params.blogId);
     this.$store.dispatch("nullifyLiveComment");
-    this.$store.dispatch("getProfile");
   },
   computed: {
     profile() {

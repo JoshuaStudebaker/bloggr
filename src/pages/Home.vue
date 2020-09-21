@@ -1,7 +1,11 @@
 <template>
   <main class="home container-fluid flex-grow-1">
     <div class="row">
-      <blogs-component v-for="iBlog in blogs" :key="iBlog.id" :blogProp="iBlog" />
+      <blogs-component
+        v-for="iBlog in blogs"
+        :key="iBlog.id"
+        :blogProp="iBlog"
+      />
     </div>
   </main>
 </template>
@@ -26,5 +30,4 @@ export default {
   },
 };
 </script>
-<style scope>
-</style>
+<style scope></style>
